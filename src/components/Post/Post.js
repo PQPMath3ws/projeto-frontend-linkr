@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { StyledPost, StyledLink } from "./styled";
 
-export default function Post({ id, post, user_image, username, post_url }) {
+export default function Post({ id, post, user_image, username, post_url, id_user }) {
   const [linkPreviewInfos, setLinkPreviewInfos] = useState({title: "", images: [], description: ""});
 
   async function getLinkInfos() {
@@ -30,7 +30,7 @@ export default function Post({ id, post, user_image, username, post_url }) {
     <StyledPost>
       <img src={user_image} alt="imagem" />
       <div>
-        <Link to={`/user/${id}`}>{username}</Link>
+        <Link to={`/user/${id_user}`}>{username}</Link>
         <h3>{post}</h3>
         <StyledLink>
           <div>

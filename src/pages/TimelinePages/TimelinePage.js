@@ -40,7 +40,7 @@ export default function TimelinePage() {
       <StyledContainer>
         <h1>timeline</h1>
         <CreatePost />
-        {posts && posts.length > 0 && posts.map(post => <Post key={post.id} id={post.id} post={post.post} user_image={post.user_image} username={post.username} post_url={post.post_url}></Post>)}
+        {posts && posts.length > 0 && posts.map(post => <Post key={post.id} id={post.id} post={post.post} user_image={post.user_image} username={post.username} post_url={post.post_url} id_user={post.id_user}></Post>)}
       </StyledContainer>
 
     </>
