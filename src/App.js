@@ -1,26 +1,28 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { SignIn } from "./components/SignIn/SignIn.js";
-import { SignUp } from "./components/SignUp/SignUp.js";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import Provider from "./context/Provider.js";
-import HashtagPage from "./pages/HashtagPages/HashtagPage";
-import TimelinePage from "./pages/TimelinePages/TimelinePage";
 
+import { HashtagPage } from "./pages/Hashtag.js";
+import { SignIn } from "./pages/SignIn.js";
+import { SignUp } from "./pages/SignUp.js";
+import { Timeline } from "./pages/Timeline.js";
 
+import GlobalStyle from "./styles/GlobalStyle.js";
+import ResetStyle from "./styles/ResetStyle.js";
 
 export default function App() {
     return (
-        <BrowserRouter>
-
-            <Provider>
+        <Provider>
+            <BrowserRouter>
+                <ResetStyle />
+                <GlobalStyle />
                 <Routes>
                     <Route path="/" element={<SignIn />} />
-                    <Route path="/sign-up" element={<SignUp />} />
                     <Route path="/hashtag/:hashtag" element={<HashtagPage />} />
-                    <Route path="/timeline" element={<TimelinePage />} />
+                    <Route path="/sign-up" element={<SignUp />} />
+                    <Route path="/timeline" element={<Timeline />} />
                 </Routes>
-
-            </Provider>
-
-        </BrowserRouter>
-    )
+            </BrowserRouter>
+        </Provider>
+    );
 }
