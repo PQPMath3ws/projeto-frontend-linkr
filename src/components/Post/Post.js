@@ -5,6 +5,7 @@ import { ReactTagify } from "react-tagify";
 import { VscHeart, VscHeartFilled } from "react-icons/vsc";
 import { StyledPost, StyledLink, StyledIcon, StyledLefDiv, StyledRightDiv } from "./styled";
 import { Tooltip } from 'react-tooltip';
+import Repost from "../Repost/Repost.js";
 import 'react-tooltip/dist/react-tooltip.css'
 
 export default function Post(props) {
@@ -84,7 +85,7 @@ export default function Post(props) {
           </p>
           <Tooltip id={id} place='bottom' style={{ 'font-size': '11px' }} />
         
-
+          <Repost id={id} />
       </StyledLefDiv>
 
       <StyledRightDiv>
