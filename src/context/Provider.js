@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Context from "./Context.js";
+
+import Context from "./Context";
 
 const Provider = ({ children }) => {
     const [token, setToken] = useState('');
