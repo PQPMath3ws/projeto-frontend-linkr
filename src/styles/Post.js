@@ -69,7 +69,7 @@ export const PostText = styled.h3`
     margin-top: 16px;
 `;
 
-export const StyledLink = styled.div`
+export const StyledLink = styled(Link)`
     border: 1px solid #FFFFFF;
     border-radius: 16px;
     display: flex;
@@ -78,6 +78,8 @@ export const StyledLink = styled.div`
     padding-left: 20px;
     margin-top: 20px;
     width: 90%;
+    cursor: pointer;
+    text-decoration: none;
 `;
 
 export const StyledLinkTitle = styled.h2`

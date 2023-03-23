@@ -20,6 +20,8 @@ export function UserPage() {
 
     const { token, setToken } = useContext(Context);
 
+    const title = "Linkr";
+
     async function getUserInfosById() {
         try {
             const request = await axios.get(`${process.env.REACT_APP_API_URL}/user/${id}`, {
@@ -28,6 +30,7 @@ export function UserPage() {
                 }
             });
             setUserInfos(request.data);
+            return request.data;
         } catch (error) {
             if (error.status === 401) {
                 setToken(null);
@@ -85,7 +88,9 @@ export function UserPage() {
     }
 
     useEffect(() => {
-        getUserInfosById().then(() => {
+        document.title = title;
+        getUserInfosById().then((user) => {
+            document.title += ` | ${user.username}'s Posts`;
             getUserPosts();
         });
     }, []);

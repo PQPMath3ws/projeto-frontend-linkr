@@ -48,7 +48,7 @@ export function Post({ id, post, user_image, username, likes, likedByUser, post_
                 <ReactTagify tagStyle={{ color: "#FFFFFF", fontWeight: 700, cursor: "pointer" }} tagClicked={(tag) => navigate(`/hashtag/${tag.slice(1, tag.length)}`)}>
                     <PostText>{post}</PostText>
                 </ReactTagify>
-                {post_url && <StyledLink>
+                {post_url && <StyledLink to={post_url} target="_blank" rel="noopener noreferrer">
                     <div>
                         <StyledLinkTitle>{linkPreviewInfos.title}</StyledLinkTitle>
                         <StyledLinkDescription>{linkPreviewInfos.description}</StyledLinkDescription>
