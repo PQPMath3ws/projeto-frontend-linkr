@@ -26,9 +26,9 @@ export function Application({ children }) {
             });
             setLoggedUserInfos(request.data);
         } catch (error) {
-            //setToken(null);
-            //localStorage.removeItem('token');
-            //navigate('/');
+            setToken(null);
+            localStorage.removeItem('token');
+            navigate('/');
         }
     }
 
