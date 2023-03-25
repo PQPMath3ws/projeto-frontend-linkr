@@ -3,15 +3,18 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ReactTagify } from "react-tagify";
 import { VscHeart, VscHeartFilled } from "react-icons/vsc";
+import { BsPencilFill, BsTrashFill } from "react-icons/bs";
 
-import { LikesText, PostText, ProfilePicture, StyledIcon, StyledLefDiv, StyledLink, StyledLinkDescription, StyledLinkTitle, StyledLinkUrl, StyledLinkUrlImage, StyledPost, StyledRightDiv, UsernameText } from "../styles/Post";
+import { ActionButton, LikesText, PostText, PostTextInput, ProfilePicture, RightActionsDiv, RightHeaderDiv, StyledIcon, StyledLefDiv, StyledLink, StyledLinkDescription, StyledLinkTitle, StyledLinkUrl, StyledLinkUrlImage, StyledPost, StyledRightDiv, UsernameText } from "../styles/Post";
 
-export function Post({ id, post, user_image, username, likes, likedByUser, post_url, likeDislikePost }) {
+export function Post({ id, post, user_image, username, likes, likedByUser, post_url, id_user, isPostOwner, setIsModalOpen, setPostId, token, getAllFollowedUsersPosts }) {
     const [linkPreviewInfos, setLinkPreviewInfos] = useState({
         title: "",
         images: [],
         description: "",
     });
+    const [canEditPost, setCanEditPost] = useState(false);
+    const [newPost, setNewPost] = useState(post);
 
     const navigate = useNavigate();
 
@@ -30,6 +33,31 @@ export function Post({ id, post, user_image, username, likes, likedByUser, post_
         }
     }
 
+    async function canUpdateThePost(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            try {
+                await axios.patch(`${process.env.REACT_APP_API_URL}/post/${id}/update`, {
+                    post: newPost
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setCanEditPost(false);
+                await getAllFollowedUsersPosts();
+            } catch (error) {
+                console.log(error);
+                setCanEditPost(false);
+            }
+        }
+    }
+
+    function openModal() {
+        setPostId(id);
+        setIsModalOpen(true);
+    }
+
     useEffect(() => {
         getLinkInfos();
     }, []);
@@ -44,10 +72,20 @@ export function Post({ id, post, user_image, username, likes, likedByUser, post_
                 <LikesText>{likes}</LikesText>
             </StyledLefDiv>
             <StyledRightDiv>
-                <UsernameText to={`/user/${id}`}>{username}</UsernameText>
-                <ReactTagify tagStyle={{ color: "#FFFFFF", fontWeight: 700, cursor: "pointer" }} tagClicked={(tag) => navigate(`/hashtag/${tag.slice(1, tag.length)}`)}>
+                <RightHeaderDiv>
+                    <UsernameText to={`/user/${id_user}`}>{username}</UsernameText>
+                    {isPostOwner && <RightActionsDiv>
+                            <ActionButton onClick={() => setCanEditPost(true)}>
+                                <BsPencilFill size={16} color="#FFFFFF" />
+                            </ActionButton>
+                            <ActionButton onClick={openModal}>
+                                <BsTrashFill size={16} color="#FFFFFF" />
+                            </ActionButton>
+                        </RightActionsDiv>}
+                </RightHeaderDiv>
+                {canEditPost ? <PostTextInput value={newPost} onKeyDown={canUpdateThePost} onChange={(event) => setNewPost(event.target.value)} ref={(ref) => ref && ref.focus()} onFocus={(event) => event.currentTarget.setSelectionRange(event.currentTarget.value.length, event.currentTarget.value.length)} /> : <ReactTagify tagStyle={{ color: "#FFFFFF", fontWeight: 700, cursor: "pointer" }} tagClicked={(tag) => navigate(`/hashtag/${tag.slice(1, tag.length)}`)}>
                     <PostText>{post}</PostText>
-                </ReactTagify>
+                    </ReactTagify>}
                 {post_url && <StyledLink to={post_url} target="_blank" rel="noopener noreferrer">
                     <div>
                         <StyledLinkTitle>{linkPreviewInfos.title}</StyledLinkTitle>

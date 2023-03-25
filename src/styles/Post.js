@@ -51,6 +51,12 @@ export const LikesText = styled.p`
     font-weight: 300;
 `;
 
+export const RightHeaderDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+`;
+
 export const UsernameText = styled(Link)`
     text-decoration: none;
     font-family: 'Lato';
@@ -60,6 +66,17 @@ export const UsernameText = styled(Link)`
     color: #FFFFFF;
 `;
 
+export const RightActionsDiv = styled.div`
+    display: flex;
+    gap: 20px;
+`;
+
+export const ActionButton = styled.button`
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+`;
+
 export const PostText = styled.h3`
     font-family: 'Lato';
     font-style: normal;
@@ -67,6 +84,24 @@ export const PostText = styled.h3`
     font-size: 17px;
     color: #B7B7B7;
     margin-top: 16px;
+`;
+
+export const PostTextInput = styled.textarea`
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    color: #4C4C4C;
+    margin-top: 16px;
+    width: 92%;
+    border: none;
+    padding: 10px;
+    border-radius: 7px;
+    resize: none;
+
+    &:focus {
+        outline: none;
+    }
 `;
 
 export const StyledLink = styled(Link)`

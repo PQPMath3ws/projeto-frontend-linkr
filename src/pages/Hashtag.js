@@ -1,23 +1,19 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { HashtagBox } from "../components/Hashtags";
 import { NavBar } from "../components/Navbar";
 import { Post } from "../components/Post";
 
-import Context from "../context/Context";
-
 import { LinkrContent, LinkrContentContainer, TimelineText } from "../styles/Timeline";
 
-export function HashtagPage() {
+export function HashtagPage({ loggedUserInfos, token, setToken }) {
     const [postsData, setPostsData] = useState([]);
 
     const navigate = useNavigate();
 
     const { hashtag } = useParams();
-
-    const { token,setToken } = useContext(Context);
 
     const title = `Linkr | #${hashtag} Posts`;
 
@@ -25,7 +21,7 @@ export function HashtagPage() {
         try {
             const request = await axios.get(`${process.env.REACT_APP_API_URL}/hashtag/${hashtag}`, {
                 headers: {
-                    Authorization: `Bearer ${token || localStorage.getItem('token')}`,
+                    Authorization: `Bearer ${token}`,
                 }
             });
             setPostsData(request.data);
@@ -36,6 +32,7 @@ export function HashtagPage() {
         }
     }
 
+    /*
     async function likeDislikePost(id, likedByUser) {
         if (likedByUser === false) {
             try {
@@ -61,6 +58,7 @@ export function HashtagPage() {
             }
         }
     }
+    */
 
     useEffect(() => {
         document.title = title;
@@ -69,11 +67,11 @@ export function HashtagPage() {
 
     return (
         <>
-            <NavBar />
+            <NavBar loggedUserInfos={loggedUserInfos} />
             <LinkrContent>
                 <LinkrContentContainer>
                     <TimelineText># {hashtag}</TimelineText>
-                    {postsData && postsData.length > 0 && postsData.map(post => <Post key={post.id} id={post.id} post={post.post} user_image={post.user_image} username={post.username} likes={post.likesCount} likedByUser={false} post_url={post.post_url} likeDislikePost={likeDislikePost} />)}
+                    {postsData && postsData.length > 0 && postsData.map(post => <Post key={post.id} id={post.id} post={post.post} user_image={post.user_image} username={post.username} likes={post.likes} likedByUser={false} post_url={post.post_url} id_user={post.id_user} />)}
                 </LinkrContentContainer>
                 <HashtagBox />
             </LinkrContent>
