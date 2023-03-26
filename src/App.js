@@ -8,6 +8,7 @@ import { SignIn } from "./pages/SignIn";
 import { SignUp } from "./pages/SignUp";
 import { Timeline } from "./pages/Timeline";
 import { UserPage } from "./pages/User";
+import { Logout } from "./pages/Logout";
 
 import GlobalStyle from "./styles/GlobalStyle";
 import ResetStyle from "./styles/ResetStyle";
@@ -24,6 +25,7 @@ export default function App() {
                     <Route path="/sign-up" element={<SignUp />} />
                     <Route path="/timeline" element={<Application><Timeline></Timeline></Application>} />
                     <Route path="/user/:id" element={<Application><UserPage></UserPage></Application>}></Route>
+                    <Route path="/logout" element={<Application><Logout></Logout></Application>}></Route>
                 </Routes>
             </BrowserRouter>
         </Provider>
