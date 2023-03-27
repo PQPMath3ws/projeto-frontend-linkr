@@ -7,9 +7,9 @@ import { NavBar } from "../components/Navbar";
 import { NewPost } from "../components/NewPost";
 import { Post } from "../components/Post";
 
-import { LinkrContent, LinkrContentContainer, ModalActionButton, ModalActionsDiv, ModalStyle, ModalTitleText, TimelineText } from "../styles/Timeline";
+import { LinkrContent, LinkrContentContainer, ModalActionButton, ModalActionsDiv, ModalStyle, ModalTitleText, TimelineMessageInfoText, TimelineText } from "../styles/Timeline";
 
-export function Timeline({ allFollowedUsersPosts, getAllFollowedUsersPosts, isModalOpen, loggedUserInfos, setIsModalOpen, token }) {
+export function Timeline({ allFollowedUsersPosts, getAllFollowedUsersPosts, getLoggedUserInfos, isModalOpen, loggedUserInfos, setIsModalOpen, token }) {
     const [postId, setPostId] = useState(0);
     const title = "Linkr | Timeline";
 
@@ -42,6 +42,8 @@ export function Timeline({ allFollowedUsersPosts, getAllFollowedUsersPosts, isMo
     }
     */
 
+    console.log(loggedUserInfos);
+
     async function deletePost() {
         try {
             await axios.delete(`${process.env.REACT_APP_API_URL}/post/${postId}/delete`, {
@@ -60,6 +62,9 @@ export function Timeline({ allFollowedUsersPosts, getAllFollowedUsersPosts, isMo
 
     useEffect(() => {
         document.title = title;
+        getLoggedUserInfos().then(() => {
+            getAllFollowedUsersPosts();
+        });
     }, []);
 
     return (
@@ -69,6 +74,7 @@ export function Timeline({ allFollowedUsersPosts, getAllFollowedUsersPosts, isMo
                 <LinkrContentContainer>
                     <TimelineText>timeline</TimelineText>
                     <NewPost loggedUserInfos={loggedUserInfos} token={token} getAllFollowedUsersPosts={getAllFollowedUsersPosts} />
+                    {allFollowedUsersPosts && allFollowedUsersPosts.length == 0 && <TimelineMessageInfoText>{loggedUserInfos.isFollowingUsers ? "No posts found from your friends" : "You don't follow anyone yet. Search for new friends!"}</TimelineMessageInfoText>}
                     {allFollowedUsersPosts && allFollowedUsersPosts.length > 0 && allFollowedUsersPosts.map(post => <Post key={post.id} id={post.id} post={post.post} user_image={post.user_image} username={post.username} likes={post.likes} likedByUser={false} post_url={post.post_url} id_user={post.id_user} isPostOwner={(post.id_user === loggedUserInfos.id)} setIsModalOpen={setIsModalOpen} setPostId={setPostId} token={token} getAllFollowedUsersPosts={getAllFollowedUsersPosts} />)}
                 </LinkrContentContainer>
                 <HashtagBox />

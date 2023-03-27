@@ -16,6 +16,14 @@ export const LinkrContentContainer = styled.div`
     align-items: center;
 `;
 
+export const TimelineMessageInfoText = styled.p`
+    font-family: 'Oswald';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    color: #FFFFFF;
+`;
+
 export const TimelineInfoDiv = styled.div`
     display: flex;
     width: 85%;

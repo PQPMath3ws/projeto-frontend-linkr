@@ -58,6 +58,7 @@ export function Application({ children }) {
             {React.cloneElement(children, {
                 allFollowedUsersPosts,
                 getAllFollowedUsersPosts,
+                getLoggedUserInfos,
                 isModalOpen,
                 loggedUserInfos,
                 setIsModalOpen,
