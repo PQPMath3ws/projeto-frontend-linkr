@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FiSearch } from "react-icons/fi"
 import { VscChevronDown, VscChevronUp } from 'react-icons/vsc';
 
-import { Avatar, Bar, DropdownLogout, Logo, Logout, RightDivContent, SearchContentDiv, SearchDiv, SearchInput, SearchResultDiv, SearchResultImage, SearchResultsDiv, SearchResultText } from "../styles/Navbar";
+import { Avatar, Bar, DropdownLogout, IsFollowingText, Logo, Logout, RightDivContent, SearchContentDiv, SearchDiv, SearchInput, SearchResultDiv, SearchResultImage, SearchResultsDiv, SearchResultText } from "../styles/Navbar";
 
 export function NavBar({ loggedUserInfos }) {
     const [open, setOpen] = useState(false);
@@ -46,6 +46,7 @@ export function NavBar({ loggedUserInfos }) {
                         {searchResult.length === 0 ? <SearchResultText>No user found.</SearchResultText> : searchResult.map((result, index) => <SearchResultDiv key={index} to={`/user/${result.id}`}>
                             <SearchResultImage src={result.image} />
                             <SearchResultText>{result.username}</SearchResultText>
+                            {result.isFollowing ? <IsFollowingText>{'\u2B24'} following</IsFollowingText> : null}
                         </SearchResultDiv>)}
                     </SearchResultsDiv>
                 </SearchContentDiv>

@@ -109,6 +109,15 @@ export const SearchResultText = styled.p`
     color: #515151;
 `;
 
+export const IsFollowingText = styled.p`
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    margin-left: 10px;
+    color: #C5C5C5;
+`;
+
 export const RightDivContent = styled.div`
     margin-right: 10px;
     display: flex;
