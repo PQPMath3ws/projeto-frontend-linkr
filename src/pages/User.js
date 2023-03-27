@@ -12,6 +12,7 @@ export function UserPage({ loggedUserInfos, token, setToken }) {
     const [userInfos, setUserInfos] = useState({});
     const [posts, setPosts] = useState([]);
     const [isFollowing, setIsFollowing] = useState(false);
+    const [followUnfollowButtonDisabled, setFollowUnfollowButtonDisabled] = useState(false);
 
     const { id } = useParams();
 
@@ -61,6 +62,7 @@ export function UserPage({ loggedUserInfos, token, setToken }) {
 
     async function followOrUnfollowProfile() {
         if (loggedUserInfos.id !== Number(id)) {
+            setFollowUnfollowButtonDisabled(true);
             if (isFollowing) {
                 try {
                     await axios.delete(`${process.env.REACT_APP_API_URL}/user/${id}/unfollow`, {
@@ -70,6 +72,7 @@ export function UserPage({ loggedUserInfos, token, setToken }) {
                     });
                     setIsFollowing(false);
                 } catch (error) {
+                    alert("error at unfollowing this user.");
                     console.log(error.response);
                 }
             } else {
@@ -81,9 +84,11 @@ export function UserPage({ loggedUserInfos, token, setToken }) {
                     });
                     setIsFollowing(true);
                 } catch (error) {
+                    alert("error at following this user.");
                     console.log(error.response);
                 }
             }
+            setFollowUnfollowButtonDisabled(false);
         }
     }
 
@@ -133,7 +138,7 @@ export function UserPage({ loggedUserInfos, token, setToken }) {
                     <TimelineInfoDiv>
                         <TimelineImage src={userInfos.image} />
                         <TimelineImageText>{userInfos.username}'s posts</TimelineImageText>
-                        {loggedUserInfos.id !== Number(id) ? <FollowUnfollowButton isFollowing={isFollowing} onClick={followOrUnfollowProfile}>{isFollowing ? "Unfollow" : "Follow"}</FollowUnfollowButton> : null}
+                        {loggedUserInfos.id !== Number(id) ? <FollowUnfollowButton disabled={followUnfollowButtonDisabled} isFollowing={isFollowing} onClick={followOrUnfollowProfile}>{isFollowing ? "Unfollow" : "Follow"}</FollowUnfollowButton> : null}
                     </TimelineInfoDiv>
                     {posts && posts.length > 0 && posts.map(post => <Post key={post.id} id={post.id} post={post.post} user_image={post.user_image} username={post.username} likes={post.likes} likedByUser={false} post_url={post.post_url} id_user={post.id_user} />)}
                 </LinkrContentContainer>
