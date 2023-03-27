@@ -18,10 +18,10 @@ export const LinkrContentContainer = styled.div`
 
 export const TimelineInfoDiv = styled.div`
     display: flex;
-    gap: 25px;
-    width: 100%;
-    margin-left: 25%;
+    width: 85%;
+    margin-left: 8%;
     margin-bottom: 10px;
+    gap: 25px;
 `;
 
 export const TimelineImage = styled.img`
@@ -36,6 +36,20 @@ export const TimelineImageText = styled.h1`
     font-weight: 700;
     font-size: 43px;
     color: #FFFFFF;
+`;
+
+export const FollowUnfollowButton = styled.button`
+    border: none;
+    background-color: ${props => props.isFollowing ? "#FFFFFF" : "#1877F2"};
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    color: ${props => props.isFollowing ? "#1877F2" : "#FFFFFF"};
+    padding: 10px 40px;
+    border-radius: 5px;
+    margin-left: 4%;
+    cursor: pointer;
 `;
 
 export const TimelineText = styled.h1`

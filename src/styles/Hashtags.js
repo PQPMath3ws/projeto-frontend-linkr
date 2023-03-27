@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const Box = styled.div`
     width: 22vw;
-    margin-top: 50px;
+    margin-top: 60px;
 `;
 
 export const BoxContainer = styled.div`

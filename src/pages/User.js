@@ -6,11 +6,12 @@ import { HashtagBox } from "../components/Hashtags";
 import { NavBar } from "../components/Navbar";
 import { Post } from "../components/Post";
 
-import { LinkrContent, LinkrContentContainer, TimelineImage, TimelineImageText, TimelineInfoDiv } from "../styles/Timeline";
+import { FollowUnfollowButton, LinkrContent, LinkrContentContainer, TimelineImage, TimelineImageText, TimelineInfoDiv } from "../styles/Timeline";
 
 export function UserPage({ loggedUserInfos, token, setToken }) {
     const [userInfos, setUserInfos] = useState({});
     const [posts, setPosts] = useState([]);
+    const [isFollowing, setIsFollowing] = useState(false);
 
     const { id } = useParams();
 
@@ -26,6 +27,7 @@ export function UserPage({ loggedUserInfos, token, setToken }) {
                 },
             });
             setUserInfos(request.data);
+            setIsFollowing(request.data.isFollowing);
             return request.data;
         } catch (error) {
             if (error.status === 401) {
@@ -53,6 +55,34 @@ export function UserPage({ loggedUserInfos, token, setToken }) {
                 navigate('/');
             } else {
                 navigate('/timeline');
+            }
+        }
+    }
+
+    async function followOrUnfollowProfile() {
+        if (loggedUserInfos.id !== Number(id)) {
+            if (isFollowing) {
+                try {
+                    await axios.delete(`${process.env.REACT_APP_API_URL}/user/${id}/unfollow`, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    });
+                    setIsFollowing(false);
+                } catch (error) {
+                    console.log(error.response);
+                }
+            } else {
+                try {
+                    await axios.post(`${process.env.REACT_APP_API_URL}/user/${id}/follow`, {}, {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    });
+                    setIsFollowing(true);
+                } catch (error) {
+                    console.log(error.response);
+                }
             }
         }
     }
@@ -103,6 +133,7 @@ export function UserPage({ loggedUserInfos, token, setToken }) {
                     <TimelineInfoDiv>
                         <TimelineImage src={userInfos.image} />
                         <TimelineImageText>{userInfos.username}'s posts</TimelineImageText>
+                        {loggedUserInfos.id !== Number(id) ? <FollowUnfollowButton isFollowing={isFollowing} onClick={followOrUnfollowProfile}>{isFollowing ? "Unfollow" : "Follow"}</FollowUnfollowButton> : null}
                     </TimelineInfoDiv>
                     {posts && posts.length > 0 && posts.map(post => <Post key={post.id} id={post.id} post={post.post} user_image={post.user_image} username={post.username} likes={post.likes} likedByUser={false} post_url={post.post_url} id_user={post.id_user} />)}
                 </LinkrContentContainer>
