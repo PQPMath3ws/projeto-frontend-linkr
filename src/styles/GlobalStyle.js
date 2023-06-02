@@ -31,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
     body {
         line-height: 1;
         width: 100%;
-        height: 100%;
+        height: 100vh;
         font-family: 'Lexend Deca', sans-serif;
         background-color:#2a2d30;
     }

@@ -12,6 +12,8 @@ export const StyledPost = styled.div`
 
     @media (max-width:611px){
        width: 100vw;
+
+       border-radius: 0;
     }
 
 form{
@@ -54,7 +56,7 @@ export const StyledInput = styled.input`
     font-family: 'Lato', sans-serif; 
     padding-left: 10px;
 
-    @media (max-width:526px){
+    @media (max-width:610px){
        width: 70vw;
     }
 

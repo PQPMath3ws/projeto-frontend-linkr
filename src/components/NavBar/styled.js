@@ -8,13 +8,15 @@ display: flex;
 justify-content: space-between;
 padding: 10px;
 box-sizing: border-box;
-position: relative;
+
 img{
     width: 53px;
     height: 53px;
     border-radius: 50%;
     margin: 0 15px 0 0;
 }
+
+
 `;
 export const Logo = styled.h1`
 color: #ffffff;

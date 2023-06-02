@@ -25,6 +25,11 @@ export const StyledContainer = styled.div`
     color: #ffffff;
     font-family: "Oswald", sans-serif;
     margin-top: 78px;
+    @media (max-width:610px){
+      padding-left: 20px;
+      margin-top: 19px;
+  }
+   
   }
 
   > h3{
@@ -37,5 +42,7 @@ export const StyledContainer = styled.div`
   }
   @media (max-width:900px){
        margin: auto;
-    }
+       width: 100%;
+  }
+   
 `;

@@ -213,8 +213,8 @@ export default function Post(props) {
               src={
                 linkPreviewInfos.images.length > 0
                   ? linkPreviewInfos.images[
-                      Math.floor(Math.random() * linkPreviewInfos.images.length)
-                    ]
+                  Math.floor(Math.random() * linkPreviewInfos.images.length)
+                  ]
                   : "https://i.pinimg.com/originals/9d/1a/a7/9d1aa76c041ff6bf890a90aa92addd76.png"
               }
               alt="imagem"

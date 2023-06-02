@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const AllScreen = styled.div`
 display: flex;
 flex-wrap: nowrap;
+height: 100%;
 @media(max-width: 900px) {
     display: block;
     margin: 0 auto;

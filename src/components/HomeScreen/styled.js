@@ -3,9 +3,9 @@ import styled from "styled-components";
 export const ScreenInfo = styled.div`
 background-color: #151515;
 width: 165%;
-height: 1100px;
+height: 100vh;
+padding-left: 150px;
 color: #FFFFFF;
-padding: 150px;
 font-weight: 700;
 box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
 @media(max-width: 900px) {

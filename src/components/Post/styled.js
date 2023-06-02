@@ -10,6 +10,11 @@ export const StyledContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    @media (max-width:610px){
+       width: 100%;
+       border-radius: 0;
+       
+    }
     
 `
 
@@ -22,6 +27,7 @@ export const StyledLeftDiv = styled.div`
     color: #FFFFFF;
     width: 80px;
     padding-left: 10px;
+    
 `
 export const StyledPost = styled.div`
     width: 611px;
@@ -29,7 +35,6 @@ export const StyledPost = styled.div`
     background-color: #171717;
     border-radius: 16px;
     display: flex;
-    margin-bottom: 16px;
     justify-content: space-around;
     position: relative;
     margin-top: ${props => props.isReposted && '33px'};
@@ -47,7 +52,10 @@ a{
     display: flex;
     flex-direction: column;
     justify-content:space-evenly;
-    width: 503px;    
+    width: 503px; 
+    @media (max-width:610px){
+        width: 160px; 
+    }   
 }
 
 
@@ -103,13 +111,23 @@ border: 1px solid #ffffff;
 border-radius: 16px;
 display: flex;
 align-items: center;
+justify-content: space-between;
 color:#9B9595;
 padding-left:10px;
+overflow-wrap: break-word;
+@media (max-width:610px){
+       width: 278px;
+    }
 
 
 
 div{
 width: 303px;
+max-width: 303px;
+overflow-wrap: break-word;
+@media (max-width:610px){
+       width: 100px;
+    }
 
 }
 
@@ -118,16 +136,23 @@ img{
     height: 155px;
     border-radius: 0px 12px 13px 0px;
     margin-top: 0;
-    margin-left: 37px;
-    
+    @media (max-width:610px){
+       width: 95px;
+    }
 }
 h2{
     font-size: 16px;
+    @media (max-width:610px){
+    font-size: 11px;
+    }
 }
 p{
     margin-top: 5px;
     margin-bottom: 13px;
     font-size: 11px;
+    @media (max-width:610px){
+    font-size: 9px;
+    }
 }
 
 
@@ -169,6 +194,9 @@ h3{
 `
 export const StyledCommentsContainer = styled.div`
 width: 571px;
+@media (max-width:610px){
+       width: 90%;
+    }
 `
 
 export const StyledNewComments = styled.div`
